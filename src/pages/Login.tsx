@@ -54,8 +54,8 @@ const Login = () => {
         await localStorage.setItem(
           "userProfile2",
           JSON.stringify({
-            name: stateUserProfile2?.name,
-            favorite: stateUserProfile2?.favorite,
+            name: stateUserProfile2?.name || "user2",
+            favorite: stateUserProfile2?.favorite || [],
             isSignIn: false,
           })
         );
@@ -73,8 +73,8 @@ const Login = () => {
         await localStorage.setItem(
           "userProfile1",
           JSON.stringify({
-            name: stateUserProfile1?.name,
-            favorite: stateUserProfile1?.favorite,
+            name: stateUserProfile1?.name || "user",
+            favorite: stateUserProfile1?.favorite || [],
             isSignIn: false,
           })
         );

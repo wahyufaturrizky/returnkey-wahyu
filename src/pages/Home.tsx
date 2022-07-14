@@ -67,7 +67,7 @@ const Home = () => {
   }, []);
 
   const handlePickFavroite = async (data: any) => {
-    if (stateUserProfile1?.name === "user") {
+    if (stateUserProfile1?.name === "user" && stateUserProfile1?.isSignIn) {
       if (stateUserProfile1?.favorite.includes(data)) {
         const removeItem = stateUserProfile1?.favorite.filter(
           (filtering: any) => filtering !== data
