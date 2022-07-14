@@ -49,7 +49,7 @@ const Home = () => {
           })
         );
 
-        window.location.reload();
+        handleCheckAuth();
       } else {
         await localStorage.setItem(
           "userProfile1",
@@ -60,7 +60,7 @@ const Home = () => {
           })
         );
 
-        window.location.reload();
+        handleCheckAuth();
       }
     } else {
       if (stateUserProfile2?.favorite.includes(data)) {
@@ -77,7 +77,7 @@ const Home = () => {
           })
         );
 
-        window.location.reload();
+        handleCheckAuth();
       } else {
         await localStorage.setItem(
           "userProfile2",
@@ -88,7 +88,7 @@ const Home = () => {
           })
         );
 
-        window.location.reload();
+        handleCheckAuth();
       }
     }
   };
