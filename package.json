@@ -1,6 +1,7 @@
 {
   "name": "returnkey-wahyu",
   "version": "0.1.0",
+  "author": "https://www.linkedin.com/in/wahyu-fatur-rizky/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
