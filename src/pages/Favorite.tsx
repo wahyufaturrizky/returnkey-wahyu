@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -20,18 +20,18 @@ const Home = () => {
     handleFetch();
   }, [initialFruitList?.length]);
 
-  useEffect(() => {
-    const handleCheckAuth = async () => {
-      const resUserProfile1 = await localStorage.getItem("userProfile1");
-      const resUserProfile2 = await localStorage.getItem("userProfile2");
-      const resUserProfile1Parse = JSON.parse(resUserProfile1 as string);
-      const resUserProfile2Parse = JSON.parse(resUserProfile2 as string);
-      setStateUserProfile1(resUserProfile1Parse);
-      setStateUserProfile2(resUserProfile2Parse);
-    };
-
-    handleCheckAuth();
+  const handleCheckAuth = useCallback(async () => {
+    const resUserProfile1 = await localStorage.getItem("userProfile1");
+    const resUserProfile2 = await localStorage.getItem("userProfile2");
+    const resUserProfile1Parse = JSON.parse(resUserProfile1 as string);
+    const resUserProfile2Parse = JSON.parse(resUserProfile2 as string);
+    setStateUserProfile1(resUserProfile1Parse);
+    setStateUserProfile2(resUserProfile2Parse);
   }, []);
+
+  useEffect(() => {
+    handleCheckAuth();
+  }, [handleCheckAuth]);
 
   const handlePickFavroite = async (data: any) => {
     if (stateUserProfile1?.name === "user" && stateUserProfile1?.isSignIn) {

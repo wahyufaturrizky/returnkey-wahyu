@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const initFruits = [
@@ -53,18 +53,18 @@ const Home = () => {
     handleFetch();
   }, [initialFruitList?.length]);
 
-  useEffect(() => {
-    const handleCheckAuth = async () => {
-      const resUserProfile1 = await localStorage.getItem("userProfile1");
-      const resUserProfile2 = await localStorage.getItem("userProfile2");
-      const resUserProfile1Parse = JSON.parse(resUserProfile1 as string);
-      const resUserProfile2Parse = JSON.parse(resUserProfile2 as string);
-      setStateUserProfile1(resUserProfile1Parse);
-      setStateUserProfile2(resUserProfile2Parse);
-    };
-
-    handleCheckAuth();
+  const handleCheckAuth = useCallback(async () => {
+    const resUserProfile1 = await localStorage.getItem("userProfile1");
+    const resUserProfile2 = await localStorage.getItem("userProfile2");
+    const resUserProfile1Parse = JSON.parse(resUserProfile1 as string);
+    const resUserProfile2Parse = JSON.parse(resUserProfile2 as string);
+    setStateUserProfile1(resUserProfile1Parse);
+    setStateUserProfile2(resUserProfile2Parse);
   }, []);
+
+  useEffect(() => {
+    handleCheckAuth();
+  }, [handleCheckAuth]);
 
   const handlePickFavroite = async (data: any) => {
     if (stateUserProfile1?.name === "user" && stateUserProfile1?.isSignIn) {
@@ -82,7 +82,7 @@ const Home = () => {
           })
         );
 
-        window.location.reload();
+        handleCheckAuth();
       } else {
         await localStorage.setItem(
           "userProfile1",
@@ -92,8 +92,7 @@ const Home = () => {
             favorite: [...stateUserProfile1?.favorite, data],
           })
         );
-
-        window.location.reload();
+        handleCheckAuth();
       }
     } else {
       if (stateUserProfile2?.favorite.includes(data)) {
@@ -109,8 +108,7 @@ const Home = () => {
             favorite: removeItem,
           })
         );
-
-        window.location.reload();
+        handleCheckAuth();
       } else {
         await localStorage.setItem(
           "userProfile2",
@@ -120,8 +118,7 @@ const Home = () => {
             favorite: [...stateUserProfile2?.favorite, data],
           })
         );
-
-        window.location.reload();
+        handleCheckAuth();
       }
     }
   };
