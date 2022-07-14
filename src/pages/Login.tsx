@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../App";
 
 const Login = () => {
   let navigate = useNavigate();
-  let auth = useAuth();
 
   const [stateUserProfile1, setStateUserProfile1] = useState<any>();
   const [stateUserProfile2, setStateUserProfile2] = useState<any>();
