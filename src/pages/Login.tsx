@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../style/Login.css";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -127,39 +128,43 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h1>
-        Fruits App by{" "}
-        <a
-          target={"_blank"}
-          href="https://www.linkedin.com/in/wahyu-fatur-rizky/"
-          rel="noreferrer"
-        >
-          Wahyu Fatur Rizki
-        </a>
-      </h1>
+    <div className="container-login">
+      <div className="contianer-content">
+        <img
+          className="image"
+          src="https://im3.ezgif.com/tmp/ezgif-3-da0475ed96.gif"
+          alt=""
+        />
+        <h2 className="title">Fruits App by </h2>
 
-      <br />
+        <div className="link">
+          <a
+            className="link-sub"
+            target={"_blank"}
+            href="https://www.linkedin.com/in/wahyu-fatur-rizky/"
+            rel="noreferrer"
+          >
+            <h3>by Wahyu Fatur Rizki</h3>
+          </a>
+        </div>
 
-      <h3>
-        * Fyi I just provide function only, If you want to see nice UI/UX please
-        hire me thank you *
-      </h3>
-
-      <br />
-
-      <p>You must log in to view the page</p>
-
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username: <input name="username" type="text" />
-        </label>
-        <br />
-        <label>
-          Password: <input name="password" type="password" />
-        </label>{" "}
-        <button type="submit">Login</button>
-      </form>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <label>Username:</label>
+            <input
+              placeholder="username"
+              className="input"
+              name="username"
+              type="text"
+            />
+            <label>Password:</label>
+            <input placeholder="password" name="password" type="password" />
+            <button className="login-button" type="submit">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

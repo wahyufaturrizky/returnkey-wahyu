@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../style/Favorite.css";
 
-const Home = () => {
+const Favorite = () => {
   const navigate = useNavigate();
   const [initialFruitList, setInitialFruitList] = useState<Array<any>>([]);
   const [stateUserProfile1, setStateUserProfile1] = useState<any>();
@@ -94,70 +95,88 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h2>Favorite</h2>
-      <br />
-      <ul>
-        <li style={{ display: "inline" }} key={"home"}>
-          <Link to="/home">Home</Link>
-        </li>
-        <li style={{ display: "inline", marginLeft: 12 }} key={"favorite"}>
-          <Link to="/favorite">Favorite</Link>
-        </li>
-      </ul>
-      <br />
+    <div className="container">
+      <div className="contianer-content">
+        <h2 className="title">Favorite</h2>
 
-      {stateUserProfile1?.name === "user" && stateUserProfile1?.isSignIn
-        ? stateUserProfile1?.favorite.map((data1: any, index1: any) => (
-            <button
-              onClick={() => handlePickFavroite(data1)}
-              style={{
-                marginRight: 12,
-                background:
-                  stateUserProfile1?.name === "user" &&
-                  stateUserProfile1?.isSignIn &&
-                  stateUserProfile1?.favorite.includes(data1)
-                    ? "pink"
-                    : undefined,
-              }}
-              key={index1}
-            >
-              {data1}
-            </button>
-          ))
-        : stateUserProfile2?.favorite.map((data2: any, index2: any) => (
-            <button
-              onClick={() => handlePickFavroite(data2)}
-              style={{
-                marginRight: 12,
-                background:
-                  stateUserProfile2?.name === "user2" &&
-                  stateUserProfile2?.isSignIn &&
-                  stateUserProfile2?.favorite.includes(data2)
-                    ? "pink"
-                    : undefined,
-              }}
-              key={index2}
-            >
-              {data2}
-            </button>
-          ))}
+        <p className="welcome">
+          Welcome {stateUserProfile1?.name || stateUserProfile2?.name}!{" "}
+        </p>
 
-      <br />
-      <br />
-      <p>
-        Welcome {stateUserProfile1?.name || stateUserProfile2?.name}!{" "}
-        <button
-          onClick={async () => {
-            await localStorage.setItem("session", "off");
-            navigate("/");
-          }}
-        >
-          Sign out
-        </button>
-      </p>
+        <ul className="list-link">
+          <li style={{ display: "inline" }} key={"home"}>
+            <Link className="link-home" to="/home">
+              Home
+            </Link>
+          </li>
+          <li style={{ display: "inline", marginLeft: 12 }} key={"favorite"}>
+            <Link className="link-favorite" to="/favorite">
+              Favorite
+            </Link>
+          </li>
+        </ul>
+
+        <div className="container-fruits">
+          {stateUserProfile1?.name === "user" && stateUserProfile1?.isSignIn
+            ? stateUserProfile1?.favorite
+                .sort((a: any, b: any) => a.localeCompare(b))
+                .map((data1: any, index1: any) => (
+                  <button
+                    onClick={() => handlePickFavroite(data1)}
+                    className={
+                      stateUserProfile1?.name === "user" &&
+                      stateUserProfile1?.isSignIn &&
+                      stateUserProfile1?.favorite.includes(data1)
+                        ? "selected"
+                        : "product"
+                    }
+                    key={index1}
+                  >
+                    {data1}
+                  </button>
+                ))
+            : stateUserProfile2?.favorite.map((data2: any, index2: any) => (
+                <button
+                  onClick={() => handlePickFavroite(data2)}
+                  className={
+                    stateUserProfile2?.name === "user2" &&
+                    stateUserProfile2?.isSignIn &&
+                    stateUserProfile2?.favorite.includes(data2)
+                      ? "selected"
+                      : "product"
+                  }
+                  key={index2}
+                >
+                  {data2}
+                </button>
+              ))}
+        </div>
+
+        <div className="signout-container">
+          <button
+            className="signout"
+            onClick={async () => {
+              await localStorage.setItem("session", "off");
+              navigate("/");
+            }}
+          >
+            Sign out
+          </button>
+        </div>
+
+        <div className="container-author">
+          <a
+            className="link-author"
+            rel="noreferrer"
+            href="https://www.linkedin.com/in/wahyu-fatur-rizky/"
+            target={"_blank"}
+          >
+            Author Wahyu Fatur Rizki
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Favorite;

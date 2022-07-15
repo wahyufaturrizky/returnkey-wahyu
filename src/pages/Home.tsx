@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../style/Home.css";
 
 const initFruits = [
   "Pineapple",
@@ -124,54 +125,74 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h2>Home</h2>
-      <br />
-      <ul>
-        <li style={{ display: "inline" }} key={"home"}>
-          <Link to="/home">Home</Link>
-        </li>
-        <li style={{ display: "inline", marginLeft: 12 }} key={"favorite"}>
-          <Link to="/favorite">Favorite</Link>
-        </li>
-      </ul>
-      <br />
+    <div className="container">
+      <div className="contianer-content">
+        <h2 className="title">Home</h2>
 
-      {initialFruitList.map((data, index) => (
-        <button
-          onClick={() => handlePickFavroite(data)}
-          style={{
-            marginRight: 12,
-            background:
-              stateUserProfile1?.name === "user" &&
-              stateUserProfile1?.isSignIn &&
-              stateUserProfile1?.favorite.includes(data)
-                ? "pink"
-                : stateUserProfile2?.name === "user2" &&
-                  stateUserProfile2?.isSignIn &&
-                  stateUserProfile2?.favorite.includes(data)
-                ? "pink"
-                : undefined,
-          }}
-          key={index}
-        >
-          {data}
-        </button>
-      ))}
+        <p className="welcome">
+          Welcome {stateUserProfile1?.name || stateUserProfile2?.name}!{" "}
+        </p>
 
-      <br />
-      <br />
-      <p>
-        Welcome {stateUserProfile1?.name || stateUserProfile2?.name}!{" "}
-        <button
-          onClick={async () => {
-            await localStorage.setItem("session", "off");
-            navigate("/");
-          }}
-        >
-          Sign out
-        </button>
-      </p>
+        <ul className="list-link">
+          <li style={{ display: "inline" }} key={"home"}>
+            <Link className="link-home" to="/home">
+              Home
+            </Link>
+          </li>
+          <li style={{ display: "inline", marginLeft: 12 }} key={"favorite"}>
+            <Link className="link-favorite" to="/favorite">
+              Favorite
+            </Link>
+          </li>
+        </ul>
+
+        <div className="container-fruits">
+          {initialFruitList
+            .sort((a, b) => a.localeCompare(b))
+            .map((data, index) => (
+              <button
+                className={
+                  stateUserProfile1?.name === "user" &&
+                  stateUserProfile1?.isSignIn &&
+                  stateUserProfile1?.favorite.includes(data)
+                    ? "selected"
+                    : stateUserProfile2?.name === "user2" &&
+                      stateUserProfile2?.isSignIn &&
+                      stateUserProfile2?.favorite.includes(data)
+                    ? "selected"
+                    : "product"
+                }
+                onClick={() => handlePickFavroite(data)}
+                key={index}
+              >
+                {data}
+              </button>
+            ))}
+        </div>
+
+        <div className="signout-container">
+          <button
+            className="signout"
+            onClick={async () => {
+              await localStorage.setItem("session", "off");
+              navigate("/");
+            }}
+          >
+            Sign out
+          </button>
+        </div>
+
+        <div className="container-author">
+          <a
+            className="link-author"
+            rel="noreferrer"
+            href="https://www.linkedin.com/in/wahyu-fatur-rizky/"
+            target={"_blank"}
+          >
+            Author Wahyu Fatur Rizki
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
