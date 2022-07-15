@@ -130,11 +130,20 @@ const Login = () => {
   return (
     <div className="container-login">
       <div className="contianer-content">
-        <img
-          className="image"
-          src="https://im3.ezgif.com/tmp/ezgif-3-da0475ed96.gif"
-          alt=""
-        />
+        <div className="giphy">
+          <iframe
+            src="https://giphy.com/embed/fldbEYcwJ0Bv3ufKaH"
+            width="100%"
+            height="100%"
+            style={{ position: "absolute" }}
+            frameBorder="0"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <p>
+          <a href="https://giphy.com/gifs/fldbEYcwJ0Bv3ufKaH">via GIPHY</a>
+        </p>
+
         <h2 className="title">Fruits App by </h2>
 
         <div className="link">
