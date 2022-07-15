@@ -132,6 +132,7 @@ const Login = () => {
       <div className="contianer-content">
         <div className="giphy">
           <iframe
+            title="fruits"
             src="https://giphy.com/embed/fldbEYcwJ0Bv3ufKaH"
             width="100%"
             height="100%"
